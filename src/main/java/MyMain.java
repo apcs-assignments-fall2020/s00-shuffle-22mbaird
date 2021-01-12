@@ -2,20 +2,27 @@ public class MyMain {
 
     // Shuffles an array, using the perfect shuffle algorithm
     public static int[] perfectShuffle(int[] arr) { 
-        int half = ((arr.length/2)-1);
-        int[] arr1 = arr[0::half];
-        int[] arr2 = arr[arr.length/2::arr.length];
-        int[] arrshuffled;
-        
-        for (int i = 0; i<arr.length; i++)
+        int half = (arr.length/2);
+        int[] arr1 = new int[half];//list for first half
+        int[] arr2 = new int[half];//list for second half
+        int[] arrshuffled = new int[arr.length];//final list
+        for (int i = 0; i<half; i++)//go thru first half of arr setting values to arr1
+        {
+            arr1[i] = arr[i];
+        }
+        for (int i = half;  i<arr.length; i++)//go thru second half of arr setting values to arr2
+        {
+            arr2[i-half] = arr[i];
+        }
+        for (int i = 0; i<arr.length; i++)// for loop to check if position is even or odd and appending values depending on whether it is even or odd
         {
             if (i%2==0)
             {
-                 arrshuffled[i] += arr1[i];
+                 arrshuffled[i] = arr1[i/2];
             }
             else
             {
-                arrshuffled[i] += arr2[i];
+                arrshuffled[i] = arr2[i/2];
             }
             
             
@@ -27,11 +34,11 @@ public class MyMain {
     // Shuffles an array, using the selection shuffle algorithm
     public static int[] selectionShuffle(int[] arr) { 
         int x = 0;
-        for (int i = 0; i<arr.length; i++)
+        for (int i = 0; i<arr.length; i++)//loop through list and switch positions with randomly generated values
         {
-            int ran = (int)(Math.random()*arr.length);
+            int ran = (int)(Math.random()*arr.length);//random value generated for swap
             x = arr[i];
-            arr[i] = arr[ran];
+            arr[i] = arr[ran];//swap positions
             arr[ran] = x;
             
         }
